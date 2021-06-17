@@ -32,8 +32,8 @@ public class DeadlockTest {
         thread1.join();
         thread2.join();
 
-        System.out.println(balance1.getValue());
-        System.out.println(balance2.getValue());
+        System.out.println("Balance 1 : " + balance1.getValue());
+        System.out.println("Balance 1 : " + balance2.getValue());
 
     }
 }

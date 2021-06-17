@@ -16,7 +16,7 @@ public class Balance {
         this.value = value;
     }
 
-    public static void transfer(Balance from, Balance to, Long value) throws InterruptedException {
+    public static void transferDeadlock(Balance from, Balance to, Long value) throws InterruptedException {
         synchronized (from) {
             Thread.sleep(1_000);
             synchronized (to) {
@@ -24,6 +24,18 @@ public class Balance {
                 from.setValue(from.getValue() - value);
                 to.setValue(to.getValue() + value);
             }
+        }
+    }
+
+    public static void transfer(Balance from, Balance to, Long value) throws InterruptedException {
+        synchronized (from) {
+            Thread.sleep(1_000);
+            from.setValue(from.getValue() - value);
+        }
+
+        synchronized (to) {
+            Thread.sleep(1_000);
+            to.setValue(to.getValue() + value);
         }
     }
 
