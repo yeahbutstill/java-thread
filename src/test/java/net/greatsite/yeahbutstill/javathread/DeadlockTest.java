@@ -7,12 +7,16 @@ public class DeadlockTest {
     @Test
     void transfer() throws InterruptedException {
 
-        var balance1 = new Balance(1_000_000L);
-        var balance2 = new Balance(1_000_000L);
+        var blue = new Balance(10_000_000L);
+        var gold = new Balance(10_000_000L);
+        var platinum = new Balance(10_000_000L);
+        var xpresi = new Balance(7_000_000L);;
+        var tapres = new Balance(10_000_000L);
+        var dollar = new Balance(10_000_000L);
 
         var thread1 = new Thread(() -> {
             try {
-                Balance.transfer(balance1, balance2, 500_000L);
+                Balance.transfer(blue, gold, 15_000_000L);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
@@ -20,7 +24,31 @@ public class DeadlockTest {
 
         var thread2 = new Thread(() -> {
             try {
-                Balance.transfer(balance2, balance1, 500_000L);
+                Balance.transfer(gold, platinum, 20_000_000L);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        });
+
+        var thread3 = new Thread(() -> {
+            try {
+                Balance.transfer(xpresi, tapres, 10_000_000L);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        });
+
+        var thread4 = new Thread(() -> {
+            try {
+                Balance.transfer(dollar, platinum, 25_000_000L);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        });
+
+        var thread5 = new Thread(() -> {
+            try {
+                Balance.transfer(tapres, gold, 20_000_000L);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
@@ -32,8 +60,11 @@ public class DeadlockTest {
         thread1.join();
         thread2.join();
 
-        System.out.println("Balance 1 : " + balance1.getValue());
-        System.out.println("Balance 1 : " + balance2.getValue());
+        System.out.println("Balance 1 : " + blue.getValue());
+        System.out.println("Balance 2 : " + gold.getValue());
+        System.out.println("Balance 3 : " + blue.getValue());
+        System.out.println("Balance 4 : " + gold.getValue());
+        System.out.println("Balance 5 : " + blue.getValue());
 
     }
 }

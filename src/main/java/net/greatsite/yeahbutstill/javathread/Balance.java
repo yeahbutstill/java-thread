@@ -8,14 +8,6 @@ public class Balance {
         this.value = value;
     }
 
-    public Long getValue() {
-        return value;
-    }
-
-    public void setValue(Long value) {
-        this.value = value;
-    }
-
     public static void transferDeadlock(Balance from, Balance to, Long value) throws InterruptedException {
         synchronized (from) {
             Thread.sleep(1_000);
@@ -37,6 +29,14 @@ public class Balance {
             Thread.sleep(1_000);
             to.setValue(to.getValue() + value);
         }
+    }
+
+    public Long getValue() {
+        return value;
+    }
+
+    public void setValue(Long value) {
+        this.value = value;
     }
 
 }
