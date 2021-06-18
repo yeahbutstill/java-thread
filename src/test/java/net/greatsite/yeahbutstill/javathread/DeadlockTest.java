@@ -10,7 +10,7 @@ public class DeadlockTest {
         var blue = new Balance(10_000_000L);
         var gold = new Balance(10_000_000L);
         var platinum = new Balance(10_000_000L);
-        var xpresi = new Balance(7_000_000L);;
+        var xpresi = new Balance(7_000_000L);
         var tapres = new Balance(10_000_000L);
         var dollar = new Balance(10_000_000L);
 
@@ -60,11 +60,20 @@ public class DeadlockTest {
         thread1.join();
         thread2.join();
 
+        thread3.start();
+        thread4.start();
+
+        thread3.join();
+        thread4.join();
+
+        thread5.start();
+
         System.out.println("Balance 1 : " + blue.getValue());
         System.out.println("Balance 2 : " + gold.getValue());
-        System.out.println("Balance 3 : " + blue.getValue());
-        System.out.println("Balance 4 : " + gold.getValue());
-        System.out.println("Balance 5 : " + blue.getValue());
+        System.out.println("Balance 3 : " + platinum.getValue());
+        System.out.println("Balance 4 : " + xpresi.getValue());
+        System.out.println("Balance 5 : " + tapres.getValue());
+        System.out.println("Balance 6 : " + dollar.getValue());
 
     }
 }
