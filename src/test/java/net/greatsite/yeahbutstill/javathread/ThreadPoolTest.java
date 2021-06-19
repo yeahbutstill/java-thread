@@ -80,9 +80,9 @@ public class ThreadPoolTest {
         var alive = 1;
         var aliveTime = TimeUnit.MINUTES;
         var queue = new ArrayBlockingQueue<Runnable>(10);
-        var rejectedHandler = new LogRejectedHandler();
+        var rejectedHandler = new LogRejectedExecutionHandler();
 
-        var executor = new ThreadPoolExecutor(minThread, maxThread, alive, aliveTime, queue);
+        var executor = new ThreadPoolExecutor(minThread, maxThread, alive, aliveTime, queue, rejectedHandler);
 
         for (int i = 0; i < 1000; i++) {
             final var task = i;
