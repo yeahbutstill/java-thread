@@ -11,7 +11,7 @@ public class ThreadPoolTest {
 
     @Test
     void create() {
-        
+
         var minThread = 10;
         var maxThread = 100;
         var alive = 1;
@@ -19,7 +19,7 @@ public class ThreadPoolTest {
         var queue = new ArrayBlockingQueue<Runnable>(100);
 
         var threadPool = new ThreadPoolExecutor(minThread, maxThread, alive, aliveTime, queue);
-        
+
     }
 
     @Test
@@ -54,7 +54,7 @@ public class ThreadPoolTest {
         var queue = new ArrayBlockingQueue<Runnable>(1000);
 
         var executor = new ThreadPoolExecutor(minThread, maxThread, alive, aliveTime, queue);
-        
+
         for (int i = 0; i < 1000; i++) {
             final var task = i;
             executor.execute(() -> {
@@ -99,7 +99,7 @@ public class ThreadPoolTest {
         executor.awaitTermination(1, TimeUnit.DAYS);
 
     }
-    
+
     public static class LogRejectedExecutionHandler implements RejectedExecutionHandler {
 
         @Override
