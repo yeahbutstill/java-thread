@@ -5,9 +5,8 @@ import java.util.concurrent.locks.ReentrantLock;
 
 public class CounterLock {
 
-    private Long value = 0L;
-
     final private Lock lock = new ReentrantLock();
+    private Long value = 0L;
 
     public void increment() {
         try {
