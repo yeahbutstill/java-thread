@@ -5,9 +5,8 @@ import java.util.concurrent.locks.ReentrantReadWriteLock;
 
 public class CounterReadWriteLock {
 
-    private Long value = 0L;
-
     final private ReadWriteLock lock = new ReentrantReadWriteLock();
+    private Long value = 0L;
 
     public void increment() {
 
