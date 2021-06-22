@@ -158,4 +158,36 @@ public class BlockingQueueTest {
 
         executor.awaitTermination(1, TimeUnit.DAYS);
     }
+
+    @Test
+    void testSynchronousQueue() throws InterruptedException {
+        final var queue = new SynchronousQueue<String>();
+        final var executor = Executors.newFixedThreadPool(20);
+
+        for (int i = 0; i <= 10; i++) {
+            final var index = i;
+            executor.execute(() -> {
+                try {
+                    queue.put("Data-" + index);
+                    System.out.println("Finish Put Data : " + index);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            });
+        }
+
+        executor.execute(() -> {
+            while (true) {
+                try {
+                    Thread.sleep(2000l);
+                    String value = queue.take();
+                    System.out.println("Receive data : " + value);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+
+        executor.awaitTermination(1, TimeUnit.DAYS);
+    }
 }
