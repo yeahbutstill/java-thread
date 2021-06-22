@@ -6,6 +6,8 @@ import java.util.concurrent.locks.ReentrantLock;
 
 public class LockTest {
 
+    String message;
+
     @Test
     void testLock() throws InterruptedException {
 
@@ -58,7 +60,6 @@ public class LockTest {
 
     }
 
-    String message;
     @Test
     void condition() throws InterruptedException {
 
@@ -89,16 +90,16 @@ public class LockTest {
         });
 
         var thread2 = new Thread(() -> {
-           try {
-               lock.lock();
-               Thread.sleep(2000);
-               message = "Transaksi Berahasil";
-               condition.signalAll();
-           } catch (InterruptedException e) {
-               e.printStackTrace();
-           } finally {
-               lock.unlock();
-           }
+            try {
+                lock.lock();
+                Thread.sleep(2000);
+                message = "Transaksi Berahasil";
+                condition.signalAll();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            } finally {
+                lock.unlock();
+            }
         });
 
         thread1.start();
