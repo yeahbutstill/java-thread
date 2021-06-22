@@ -17,16 +17,16 @@ public class SemaphoreTest {
 
         for (int i = 0; i < 1000; i++) {
             executor.execute(() -> {
-               try {
-                   // mengacquire menunggu 1000 thread sampai semaphorenya release
-                   semaphore.acquire();
-                   Thread.sleep(1000);
-                   System.out.println("Finish");
-               } catch (InterruptedException e) {
-                   e.printStackTrace();
-               } finally {
-                   semaphore.release();
-               }
+                try {
+                    // mengacquire menunggu 1000 thread sampai semaphorenya release
+                    semaphore.acquire();
+                    Thread.sleep(1000);
+                    System.out.println("Finish");
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                } finally {
+                    semaphore.release();
+                }
             });
         }
 
