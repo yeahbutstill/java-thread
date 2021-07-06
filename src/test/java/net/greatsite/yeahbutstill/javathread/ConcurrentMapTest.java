@@ -21,14 +21,14 @@ public class ConcurrentMapTest {
         for (int i = 0; i < 100; i++) {
             final var key = i;
             executor.execute(() -> {
-               try {
-                   Thread.sleep(2000);
-                   map.putIfAbsent(key, "Dataa : " + key);
-               } catch (InterruptedException e) {
-                   e.printStackTrace();
-               } finally {
-                   countDown.countDown();
-               }
+                try {
+                    Thread.sleep(2000);
+                    map.putIfAbsent(key, "Dataa : " + key);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                } finally {
+                    countDown.countDown();
+                }
             });
         }
 
